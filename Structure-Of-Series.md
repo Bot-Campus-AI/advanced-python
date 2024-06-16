@@ -66,7 +66,7 @@ Sure, here are the revised diagrams to illustrate the structure of Series using 
    2023-01-04    400
    dtype: int64
    ```
-
+ 
    - **DateTime Index**: Uses dates as the index, useful for time series data.
 
 These diagrams should now provide a better visualization of different structures and features of Series using Indian names. If you need further customization or additional features, feel free to ask!
