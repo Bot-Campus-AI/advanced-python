@@ -1,74 +1,118 @@
-### Part 1: What is Pandas?
+# Applying Functions to DataFrames with Pandas
 
-"Pandas is an open-source library that provides high-performance, easy-to-use data structures and data analysis tools for Python. It's built on top of NumPy and is particularly useful for working with structured data, such as CSV files or SQL tables."
+## Overview
+This tutorial covers how to apply functions to DataFrames using Pandas. Applying functions is a powerful way to transform, analyze, and manipulate your data efficiently. By the end of this tutorial, you will understand various methods to apply functions to DataFrames and how to use them effectively.
 
-### Part 2: Understanding DataFrames and Series
+## Table of Contents
+1. [Understanding Function Application](#understanding-function-application)
+2. [Using `apply` Method](#using-apply-method)
+3. [Using `map` Method for Element-wise Operations](#using-map-method-for-element-wise-operations)
+4. [Using `map` for Series](#using-map-for-series)
+5. [Using Custom Functions](#using-custom-functions)
+6. [Practical Applications](#practical-applications)
+7. [About BotCampus AI](#about-botcampus-ai)
 
-**DataFrames:**
-"A DataFrame is a 2-dimensional labeled data structure with columns of potentially different types. It's similar to a table in a database or an Excel spreadsheet. DataFrames are incredibly versatile and are the primary data structure you'll be working with in Pandas."
+## Understanding Function Application
 
-**Key Characteristics of DataFrames:**
-1. **Labeled Axes:**
-   "DataFrames have labeled axes (rows and columns), which makes it easy to refer to data by column name or row index."
-2. **Heterogeneous Data:**
-   "Each column in a DataFrame can contain different types of data, such as integers, floats, strings, and more."
-3. **Size-Mutable:**
-   "DataFrames can be resized by adding or removing rows and columns."
+### Why Apply Functions?
+Applying functions to DataFrames allows you to perform complex transformations and calculations across your data efficiently. This is essential for data cleaning, feature engineering, and analysis.
 
-**Series:**
-"A Series is a one-dimensional labeled array capable of holding any data type. You can think of a Series as a single column in a DataFrame. Series are useful when you need to work with one-dimensional data."
+**Examples:**
+- Normalization
+- Aggregation
+- Custom Calculations
 
-**Key Characteristics of Series:**
-1. **Labeled Index:**
-   "Each element in a Series has a label, which is often referred to as the index. This index can be used to access elements directly."
-2. **Homogeneous Data:**
-   "Unlike DataFrames, Series are homogeneous, meaning all elements are of the same data type."
-3. **Flexible Creation:**
-   "Series can be created from various data structures, including lists, dictionaries, and scalar values."
+## Using `apply` Method
 
-### Part 3: Practical Applications of DataFrames and Series
+### Using `apply` for Row and Column Operations
+The `apply` method lets you apply a function along an axis of the DataFrame (either rows or columns).
 
-**Data Analysis and Manipulation:**
-"DataFrames and Series are designed to handle large datasets efficiently. They offer a range of functionalities for data analysis and manipulation, such as filtering, aggregation, and merging."
+**Code Example: Using `apply` for Column Operations**
+```python
+import pandas as pd
 
-**Cleaning and Preparing Data:**
-"One of the primary uses of DataFrames is cleaning and preparing data. You can handle missing values, remove duplicates, and transform data types seamlessly."
+# Sample data
+data = {
+    'A': [1, 2, 3, 4],
+    'B': [10, 20, 30, 40]
+}
+data_frame = pd.DataFrame(data)
+print("Original DataFrame:\n", data_frame)
 
-**Integration with Other Libraries:**
-"Pandas integrates well with other Python libraries, such as NumPy for numerical operations, Matplotlib and Seaborn for data visualization, and SQLAlchemy for database interactions."
+# Applying a function to each column
+column_sum = data_frame.apply(lambda x: x.sum())
+print("\nSum of Each Column:\n", column_sum)
+```
 
-### Part 4: Benefits of Using DataFrames and Series
+**Code Example: Using `apply` for Row Operations**
+```python
+# Applying a function to each row
+row_sum = data_frame.apply(lambda x: x.sum(), axis=1)
+print("\nSum of Each Row:\n", row_sum)
+```
 
-**Ease of Use:**
-"Pandas provides a simple and intuitive API that makes it easy to perform complex data manipulations with just a few lines of code."
+## Using `map` Method for Element-wise Operations
 
-**Performance:**
-"Built on top of NumPy, Pandas is designed to handle large datasets efficiently. It offers fast performance for common data manipulation tasks."
+### Using `map` for Element-wise Operations
+The `map` method can be used for element-wise transformations within a DataFrame or Series. This method is now recommended over `applymap` for element-wise operations.
 
-**Flexibility:**
-"With support for various data formats, including CSV, Excel, SQL, and JSON, Pandas allows you to work with data from multiple sources seamlessly."
+**Code Example: Using `map`**
+```python
+# Applying a function to each element
+elementwise_square = data_frame.map(lambda x: x ** 2)
+print("\nElement-wise Square of DataFrame:\n", elementwise_square)
+```
 
-**Community and Documentation:**
-"Pandas has a large and active community, along with extensive documentation and resources, making it easier for beginners to get started and for experienced users to find solutions to advanced problems."
+## Using `map` for Series
+
+### Using `map` for Series
+The `map` method is used to apply a function to each element of a Series. It's useful for transformations within a single column.
+
+**Code Example: Using `map`**
+```python
+# Applying a function to a Series
+data_frame['A'] = data_frame['A'].map(lambda x: x * 2)
+print("\nDataFrame after Applying map to Column 'A':\n", data_frame)
+```
+
+## Using Custom Functions
+
+### Defining and Applying Custom Functions
+You can define your custom functions and apply them to DataFrames using the methods we've discussed. This allows for more complex and tailored transformations.
+
+**Code Example: Custom Function with `apply`**
+```python
+# Defining a custom function
+def custom_function(x):
+    return x * 2 if x % 2 == 0 else x * 3
+
+# Applying the custom function to each element using apply
+custom_transformed = data_frame.map(custom_function)
+print("\nDataFrame after Applying Custom Function:\n", custom_transformed)
+```
+
+## Practical Applications
+
+### Practical Applications of Function Application
+Applying functions to DataFrames is widely used in data analysis for tasks such as data cleaning, feature engineering, and aggregation.
+
+**Examples:**
+- Normalizing data
+- Calculating new features
+- Summarizing data with custom functions
 
 ## About BotCampus AI
 
 **BotCampus AI** is a leading provider of AI and machine learning education. Our mission is to empower individuals and organizations with the knowledge and skills needed to thrive in the AI-driven world.
 
 ### Learning Management System
-
 Access our LMS portal at [learn.botcampus.ai](https://learn.botcampus.ai) for more courses and resources.
 
 ### Contact Us
-
 - **Website:** [www.botcampus.ai](https://www.botcampus.ai)
 - **Email:** support@botcampus.ai
 - **GitHub:** [BotCampus AI on GitHub](https://github.com/Bot-Campus-AI/advanced-python)
 
----
-
-We hope this guide helps you enhance your Python skills with BotCampus AI. Enjoy your coding journey!
-
----
+Thank you for using this project to enhance your Python journey with BotCampus AI. Enjoy coding!
 
 © 2024 BotCampus AI. All rights reserved.
