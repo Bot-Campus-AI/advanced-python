@@ -1,0 +1,5 @@
+[
+    {"name": "Raj", "age": 30, "address": {"city": "Delhi", "state": "Delhi"}},
+    {"name": "Amit", "age": 25, "address": {"city": "Mumbai", "state": "Maharashtra"}},
+    {"name": "Priya", "age": 35, "address": {"city": "Bangalore", "state": "Karnataka"}}
+]
