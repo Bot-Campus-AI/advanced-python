@@ -1,5 +1,3 @@
-### Theoretical Script: Introduction to Pandas DataFrames and Series
-
 ### Part 1: What is Pandas?
 
 "Pandas is an open-source library that provides high-performance, easy-to-use data structures and data analysis tools for Python. It's built on top of NumPy and is particularly useful for working with structured data, such as CSV files or SQL tables."
