@@ -1,74 +1,139 @@
-### Part 1: What is Pandas?
+# Working with Text Data in Pandas
 
-"Pandas is an open-source library that provides high-performance, easy-to-use data structures and data analysis tools for Python. It's built on top of NumPy and is particularly useful for working with structured data, such as CSV files or SQL tables."
+## Overview
+This tutorial explores how to work with text data using Pandas. Handling text data is crucial for many data analysis tasks, including cleaning, transforming, and extracting information from textual information. By the end of this tutorial, you will understand how to efficiently work with text data in Pandas.
 
-### Part 2: Understanding DataFrames and Series
+## Table of Contents
+1. [Understanding Text Data](#understanding-text-data)
+2. [Practical Applications of Text Data Handling](#practical-applications-of-text-data-handling)
+3. [Loading and Inspecting Text Data](#loading-and-inspecting-text-data)
+4. [Cleaning Text Data](#cleaning-text-data)
+5. [Extracting Information from Text Data](#extracting-information-from-text-data)
+6. [Manipulating Text Data](#manipulating-text-data)
+7. [Applying Functions to Text Data](#applying-functions-to-text-data)
+8. [About BotCampus AI](#about-botcampus-ai)
 
-**DataFrames:**
-"A DataFrame is a 2-dimensional labeled data structure with columns of potentially different types. It's similar to a table in a database or an Excel spreadsheet. DataFrames are incredibly versatile and are the primary data structure you'll be working with in Pandas."
+## Understanding Text Data
 
-**Key Characteristics of DataFrames:**
-1. **Labeled Axes:**
-   "DataFrames have labeled axes (rows and columns), which makes it easy to refer to data by column name or row index."
-2. **Heterogeneous Data:**
-   "Each column in a DataFrame can contain different types of data, such as integers, floats, strings, and more."
-3. **Size-Mutable:**
-   "DataFrames can be resized by adding or removing rows and columns."
+### What is Text Data?
+Text data consists of strings or sequences of characters. It can include anything from names and addresses to entire documents. Working with text data involves various tasks such as cleaning, manipulation, and extraction.
 
-**Series:**
-"A Series is a one-dimensional labeled array capable of holding any data type. You can think of a Series as a single column in a DataFrame. Series are useful when you need to work with one-dimensional data."
+**Examples:**
+- Names
+- Addresses
+- Text documents
 
-**Key Characteristics of Series:**
-1. **Labeled Index:**
-   "Each element in a Series has a label, which is often referred to as the index. This index can be used to access elements directly."
-2. **Homogeneous Data:**
-   "Unlike DataFrames, Series are homogeneous, meaning all elements are of the same data type."
-3. **Flexible Creation:**
-   "Series can be created from various data structures, including lists, dictionaries, and scalar values."
+## Practical Applications of Text Data Handling
 
-### Part 3: Practical Applications of DataFrames and Series
+### Practical Applications
+Handling text data is essential in various real-world applications, such as natural language processing (NLP), text mining, data cleaning, sentiment analysis, and customer feedback analysis.
 
-**Data Analysis and Manipulation:**
-"DataFrames and Series are designed to handle large datasets efficiently. They offer a range of functionalities for data analysis and manipulation, such as filtering, aggregation, and merging."
+**Examples:**
+- Cleaning and preprocessing text data for an NLP model
+- Extracting specific information from large text datasets
+- Transforming unstructured text into structured data for analysis
 
-**Cleaning and Preparing Data:**
-"One of the primary uses of DataFrames is cleaning and preparing data. You can handle missing values, remove duplicates, and transform data types seamlessly."
+## Loading and Inspecting Text Data
 
-**Integration with Other Libraries:**
-"Pandas integrates well with other Python libraries, such as NumPy for numerical operations, Matplotlib and Seaborn for data visualization, and SQLAlchemy for database interactions."
+### Loading Text Data
+Let's start by loading some text data into a Pandas DataFrame.
 
-### Part 4: Benefits of Using DataFrames and Series
+**Code Example: Loading Text Data**
+```python
+import pandas as pd
 
-**Ease of Use:**
-"Pandas provides a simple and intuitive API that makes it easy to perform complex data manipulations with just a few lines of code."
+# Sample data
+data = {
+    'Name': ['Raj Kumar', 'Amit Sharma', 'Priya Singh', 'Sara Ali'],
+    'Occupation': ['Data Scientist', 'Engineer', 'Doctor', 'Artist'],
+    'Address': ['123 Elm St, Delhi', '456 Oak St, Mumbai', '789 Pine St, Bangalore', '101 Maple St, Pune']
+}
+data_frame = pd.DataFrame(data)
+print("Original DataFrame:\n", data_frame)
+```
 
-**Performance:**
-"Built on top of NumPy, Pandas is designed to handle large datasets efficiently. It offers fast performance for common data manipulation tasks."
+## Cleaning Text Data
 
-**Flexibility:**
-"With support for various data formats, including CSV, Excel, SQL, and JSON, Pandas allows you to work with data from multiple sources seamlessly."
+### Cleaning Text Data
+Cleaning text data involves removing unwanted characters, correcting formatting, and standardizing text.
 
-**Community and Documentation:**
-"Pandas has a large and active community, along with extensive documentation and resources, making it easier for beginners to get started and for experienced users to find solutions to advanced problems."
+**Code Example: Cleaning Text Data**
+```python
+# Removing leading/trailing whitespace
+data_frame['Name'] = data_frame['Name'].str.strip()
+
+# Converting to lowercase
+data_frame['Name'] = data_frame['Name'].str.lower()
+
+# Removing special characters
+data_frame['Address'] = data_frame['Address'].str.replace(r'\W', ' ', regex=True)
+
+print("\nCleaned DataFrame:\n", data_frame)
+```
+
+## Extracting Information from Text Data
+
+### Extracting Information
+Extracting information involves pulling out specific parts of the text, such as extracting names, addresses, or other meaningful information.
+
+**Code Example: Extracting Information**
+```python
+# Extracting first names
+data_frame['First Name'] = data_frame['Name'].str.split().str[0]
+
+# Extracting cities from addresses
+data_frame['City'] = data_frame['Address'].str.extract(r'(\bDelhi\b|\bMumbai\b|\bBangalore\b|\bPune\b)')
+
+print("\nDataFrame with Extracted Information:\n", data_frame)
+```
+
+## Manipulating Text Data
+
+### Manipulating Text Data
+Manipulating text data involves combining, splitting, and transforming text to suit your analysis needs.
+
+**Code Example: Manipulating Text Data**
+```python
+# Combining columns
+data_frame['Name_Address'] = data_frame['Name'] + ', ' + data_frame['Address']
+
+# Splitting addresses into multiple columns
+address_split = data_frame['Address'].str.split(',', expand=True)
+data_frame['Street'] = address_split[0]
+data_frame['City'] = address_split[1]
+
+print("\nDataFrame with Manipulated Text Data:\n", data_frame)
+```
+
+## Applying Functions to Text Data
+
+### Applying Functions
+You can apply custom functions to text data for more complex transformations and analysis.
+
+**Code Example: Applying Functions**
+```python
+# Custom function to count words in a string
+def word_count(text):
+    return len(text.split())
+
+# Applying the custom function to the 'Occupation' column
+data_frame['Occupation Word Count'] = data_frame['Occupation'].apply(word_count)
+
+print("\nDataFrame with Word Count in Occupation:\n", data_frame)
+```
 
 ## About BotCampus AI
 
 **BotCampus AI** is a leading provider of AI and machine learning education. Our mission is to empower individuals and organizations with the knowledge and skills needed to thrive in the AI-driven world.
 
 ### Learning Management System
-
 Access our LMS portal at [learn.botcampus.ai](https://learn.botcampus.ai) for more courses and resources.
 
 ### Contact Us
-
 - **Website:** [www.botcampus.ai](https://www.botcampus.ai)
 - **Email:** support@botcampus.ai
 - **GitHub:** [BotCampus AI on GitHub](https://github.com/Bot-Campus-AI/advanced-python)
 
----
-
-We hope this guide helps you enhance your Python skills with BotCampus AI. Enjoy your coding journey!
-
----
+Thank you for using this project to enhance your Python journey with BotCampus AI. Enjoy coding!
 
 © 2024 BotCampus AI. All rights reserved.
