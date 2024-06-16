@@ -63,7 +63,7 @@ Access our LMS portal at [learn.botcampus.ai](https://learn.botcampus.ai) for mo
 
 - **Website:** [www.botcampus.ai](https://www.botcampus.ai)
 - **Email:** support@botcampus.ai
-- **GitHub:** [BotCampus AI on GitHub](https://github.com/Bot-Campus-AI/Python-Fundamentals)
+- **GitHub:** [BotCampus AI on GitHub](https://github.com/Bot-Campus-AI/advanced-python)
 
 ---
 
