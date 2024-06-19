@@ -10,9 +10,9 @@ time_series = pd.Series(np.random.randn(len(date_range)), index=date_range)
 print("\nTime Series:\n", time_series)
 
 # Resampling to monthly frequency and calculating the mean
-monthly_resampled = time_series.resample('M').mean()
+monthly_resampled = time_series.resample('ME').mean()
 print("\nMonthly Resampled Time Series:\n", monthly_resampled)
 
 # Resampling to hourly frequency and forward filling missing values
-hourly_resampled = time_series.resample('H').ffill()
+hourly_resampled = time_series.resample('h').ffill()
 print("\nHourly Resampled Time Series:\n", hourly_resampled)
